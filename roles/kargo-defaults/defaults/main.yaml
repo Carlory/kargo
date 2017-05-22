@@ -97,12 +97,12 @@ docker_daemon_graph: "/var/lib/docker"
 # Docker log options
 # Rotate container stderr/stdout logs at 50m and keep last 5
 docker_log_opts: "--log-opt max-size=50m --log-opt max-file=5"
-
+registry_mirrors: ["http://5ada73f7.m.daocloud.io", "https://2wp6jj8y.mirror.aliyuncs.com"]
 ## A string of extra options to pass to the docker daemon.
 ## This string should be exactly as you wish it to appear.
 ## An obvious use case is allowing insecure-registry access
 ## to self hosted registries like so:
-docker_options: "--insecure-registry={{ kube_service_addresses }} --graph={{ docker_daemon_graph }} {{ docker_log_opts }}"
+docker_options: "--insecure-registry={{ kube_service_addresses }} --graph={{ docker_daemon_graph }} {{ docker_log_opts }} --registry-mirrors={{ registry_mirrors }}"
 
 # Settings for containerized control plane (etcd/kubelet/secrets)
 etcd_deployment_type: docker
@@ -112,5 +112,5 @@ vault_deployment_type: docker
 
 # K8s image pull policy (imagePullPolicy)
 k8s_image_pull_policy: IfNotPresent
-efk_enabled: false
+efk_enabled: true
 enable_network_policy: false
