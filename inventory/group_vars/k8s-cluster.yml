@@ -110,12 +110,12 @@ dns_domain: "{{ cluster_name }}"
 
 # Path used to store Docker data
 docker_daemon_graph: "/var/lib/docker"
-
+docker_registry_mirrors: ["https://2wp6jj8y.mirror.aliyuncs.com", "http://5ada73f7.m.daocloud.io"]
 ## A string of extra options to pass to the docker daemon.
 ## This string should be exactly as you wish it to appear.
 ## An obvious use case is allowing insecure-registry access
 ## to self hosted registries like so:
-docker_options: "--insecure-registry={{ kube_service_addresses }} --graph={{ docker_daemon_graph }}"
+docker_options: "--insecure-registry={{ kube_service_addresses }} --graph={{ docker_daemon_graph }} --registry-mirrors={{ docker_registry_mirrors }}"
 docker_bin_dir: "/usr/bin"
 
 # Settings for containerized control plane (etcd/kubelet/secrets)
@@ -128,7 +128,7 @@ vault_deployment_type: docker
 k8s_image_pull_policy: IfNotPresent
 
 # Monitoring apps for k8s
-efk_enabled: false
+efk_enabled: true
 
 # Helm deployment
 helm_enabled: false
