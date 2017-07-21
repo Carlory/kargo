@@ -13,7 +13,7 @@ SUPPORTED_OS = {
   "coreos-stable" => {box: "coreos-stable",      bootstrap_os: "coreos", user: "core", box_url: COREOS_URL_TEMPLATE % ["stable"]},
   "coreos-alpha"  => {box: "coreos-alpha",       bootstrap_os: "coreos", user: "core", box_url: COREOS_URL_TEMPLATE % ["alpha"]},
   "coreos-beta"   => {box: "coreos-beta",        bootstrap_os: "coreos", user: "core", box_url: COREOS_URL_TEMPLATE % ["beta"]},
-  "ubuntu"        => {box: "bento/ubuntu-16.04", bootstrap_os: "ubuntu", user: "ubuntu"},
+  "ubuntu"        => {box: "bento/ubuntu-16.04", bootstrap_os: "ubuntu", user: "vagrant"},
 }
 
 # Defaults for config options defined in CONFIG
@@ -30,8 +30,6 @@ $os = "ubuntu"
 $etcd_instances = $num_instances
 # The first two nodes are masters
 $kube_master_instances = $num_instances == 1 ? $num_instances : ($num_instances - 1)
-# All nodes are kube nodes
-$kube_node_instances = $num_instances
 $local_release_dir = "/vagrant/temp"
 
 host_vars = {}
@@ -39,6 +37,9 @@ host_vars = {}
 if File.exist?(CONFIG)
   require CONFIG
 end
+
+# All nodes are kube nodes
+$kube_node_instances = $num_instances
 
 $box = SUPPORTED_OS[$os][:box]
 # if $inventory is not set, try to use example
@@ -98,6 +99,10 @@ Vagrant.configure("2") do |config|
           v.vmx['memsize'] = $vm_memory
           v.vmx['numvcpus'] = $vm_cpus
         end
+      end
+
+      $shared_folders.each do |src, dst|
+        config.vm.synced_folder src, dst
       end
 
       config.vm.provider :virtualbox do |vb|
