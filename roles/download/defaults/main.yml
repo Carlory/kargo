@@ -71,7 +71,7 @@ nginx_image_tag: 1.11.4-alpine
 dnsmasq_version: 2.72
 dnsmasq_image_repo: "andyshinn/dnsmasq"
 dnsmasq_image_tag: "{{ dnsmasq_version }}"
-kubedns_version: 1.14.2
+kubedns_version: "v1.14.1"
 kubedns_image_repo: "daocloud.io/daocloud/google_containers_k8s-dns-kube-dns-amd64"
 kubedns_image_tag: "{{ kubedns_version }}"
 dnsmasq_nanny_image_repo: "daocloud.io/daocloud/google_containers_k8s-dns-dnsmasq-nanny-amd64"
