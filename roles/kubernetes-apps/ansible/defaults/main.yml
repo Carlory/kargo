@@ -10,9 +10,9 @@ kubedns_min_replicas: 2
 kubedns_nodes_per_replica: 10
 
 # Images
-kubedns_image_repo: "daocloud.io/daocloud/google_containers_kubedns-amd64"
+kubedns_image_repo: "daocloud.io/daocloud/google_containers_k8s-dns-kube-dns-amd64"
 kubedns_image_tag: "{{ kubedns_version }}"
-dnsmasq_nanny_image_repo: "daocloud.io/daocloud/google_containers_kube-dnsmasq-amd64"
+dnsmasq_nanny_image_repo: "daocloud.io/daocloud/google_containers_k8s-dns-dnsmasq-nanny-amd64"
 dnsmasq_nanny_image_tag: "{{ kubedns_version }}"
 dnsmasq_sidecar_image_repo: "daocloud.io/daocloud/google_containers_k8s-dns-sidecar-amd64"
 dnsmasq_sidecar_image_tag: "{{ kubedns_version }}"
