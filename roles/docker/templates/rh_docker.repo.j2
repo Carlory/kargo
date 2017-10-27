@@ -1,7 +1,7 @@
 [dockerrepo]
 name=Docker Repository
-baseurl=http://mirrors.aliyun.com/docker-engine/yum/repo/main/centos/7
+baseurl=https://yum.dockerproject.org/repo/main/centos/7
 enabled=1
 gpgcheck=1
-gpgkey=http://mirrors.aliyun.com/docker-engine/yum/gpg
+gpgkey=https://yum.dockerproject.org/gpg
 {% if http_proxy is defined %}proxy={{ http_proxy }}{% endif %}
